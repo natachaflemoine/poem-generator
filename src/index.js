@@ -9,13 +9,14 @@ function generatePoem(event) {
   let apiUrl =
     `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-    console.log("generating poem");
+  let poemElement = document.querySelector("#poem");
+  poemElement.classList.remove("hidden");
+  poemElement.innerHTML = `<div class="generating"> ⏳ Generating a poem about ${instructionsInput.value}</div>`; 
 
   axios.get(apiUrl).then(publishPoem);
 }
 
 function publishPoem(response) {
-    console.log("poem generated");
      let poem = response.data.answer; 
   new Typewriter("#poem", {
     strings: `${poem}`,
